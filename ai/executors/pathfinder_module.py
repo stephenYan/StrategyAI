@@ -54,9 +54,9 @@ class PathfinderModule:
         if ai_cmd.ball_collision and game_state.is_ball_on_field:
             path_obstacles.append(Obstacle(game_state.ball_position.array, avoid_distance=MIN_DISTANCE_FROM_OBSTACLE))
 
-        path_obstacles.append(Obstacle(Position(-4500, 500).array, avoid_distance=1000))
-        path_obstacles.append(Obstacle(Position(-4500, -500).array, avoid_distance=1000))
-        path_obstacles.append(Obstacle(Position(4500, 500).array, avoid_distance=1000))
-        path_obstacles.append(Obstacle(Position(4500, -500).array, avoid_distance=1000))
+        path_obstacles.append(Obstacle(Position(-6000, 250).array, avoid_distance=1250))
+        path_obstacles.append(Obstacle(Position(-6000, -250).array, avoid_distance=1250))
+        path_obstacles.append(Obstacle(Position(6000, 250).array, avoid_distance=1250))
+        path_obstacles.append(Obstacle(Position(6000, -250).array, avoid_distance=1250))
 
         return path_obstacles

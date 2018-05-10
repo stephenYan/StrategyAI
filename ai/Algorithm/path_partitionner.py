@@ -12,7 +12,7 @@ from Util.path import Path
 MIN_PATH_LENGTH = 250  # mm
 RECURSION_LIMIT = 3
 SUB_TARGET_RESOLUTION_FACTOR = 10
-ELLIPSE_HALF_WIDTH = 500
+ELLIPSE_HALF_WIDTH = 1000
 
 
 class Obstacle:
@@ -43,7 +43,8 @@ class PathPartitionner:
         target_to_obs = np.linalg.norm(target - self.obstacles_position, axis=1)
         is_inside_ellipse = (start_to_obs + target_to_obs) <= np.sqrt(np.linalg.norm(start - target) ** 2 + ELLIPSE_HALF_WIDTH ** 2)
         is_not_self = start_to_obs > 0 # remove self if present
-        self.obstacles = obstacles[is_inside_ellipse & is_not_self].tolist()
+        is_around_self = start_to_obs > 1000
+        self.obstacles = obstacles[(is_inside_ellipse | is_around_self) & is_not_self].tolist()
 
     def get_path(self, start: Position, target: Position, obstacles: List[Obstacle], last_path: Optional[Path]=None):
 
