@@ -3,6 +3,7 @@ from typing import List
 
 import logging
 
+from ai.STA.Tactic.fast_kick import FastKick
 from ai.STA.Tactic.pass_to_player import PassToPlayer
 from ai.STA.Tactic.demo_follow_robot import DemoFollowRobot
 from ai.STA.Tactic.tactic import Tactic
@@ -31,6 +32,7 @@ class TacticBook(object):
         self.tactic_book = {
             'DemoFollowBall': DemoFollowBall,
             'DemoFollowRobot': DemoFollowRobot,
+            'FastKick': FastKick,
             'GoalKeeper': GoalKeeper,
             'GoKick': GoKick,
             'GoToPositionPathfinder': GoToPositionPathfinder,
