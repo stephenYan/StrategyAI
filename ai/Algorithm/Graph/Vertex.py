@@ -14,7 +14,7 @@ class Vertex:
         next_node: Le numéro du noeud suivant, pointé par l'extrémité du vertex.
         condition: Une fonction retournant un booléen indiquant si on peut passer au noeud suivant.
     """
-    def __init__(self, next_node, p_condition):
+    def __init__(self, next_node, p_condition, argument):
         """
         :param next_node: Un entier positif représentant le numéro du noeud suivant, pointé par l'extrémité du vertex.
         :param p_condition: Une fonction retournant un booléen indiquant si on peut passer au noeud suivant.
@@ -23,6 +23,7 @@ class Vertex:
 
         self.next_node = next_node
         self.condition = p_condition
+        self.argument = argument
 
     def evaluate_condition(self):
         """
@@ -30,7 +31,10 @@ class Vertex:
         condition et retourne son résultat.
         :return: Un booléen indiquant si la condition pour passer au noeud suivant est remplie.
         """
-        return self.condition()
+        if self.argument is None:
+            return self.condition()
+        else:
+            return self.condition(self.argument)
 
     def __str__(self):
         """

@@ -42,8 +42,8 @@ class Node:
                 return
         self.vertices.append(p_vertex)
 
-    def connect_to(self, dst_node, *, when: Callable[..., bool]):
-        self.add_vertex(Vertex(dst_node, when))
+    def connect_to(self, dst_node, argument, *, when: Callable[..., bool]):
+        self.add_vertex(Vertex(dst_node, when, argument))
 
     def debug_cmd(self):
         cmd = self.tactic.debug_cmd()

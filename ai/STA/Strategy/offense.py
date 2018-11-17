@@ -38,19 +38,19 @@ class Offense(Strategy):
                                                              auto_update_target=True))
                 node_wait_for_pass = self.create_node(role, ReceivePass(self.game_state, player))
 
-                player_is_closest = partial(self.is_closest_not_goalkeeper, player)
-                player_is_not_closest = partial(self.is_not_closest, player)
-                player_has_kicked = partial(self.has_kicked, player)
-                player_is_receiving_pass = partial(self.ball_going_toward_player, player)
-                player_is_not_receiving_pass = partial(self.ball_not_going_toward_player, player)
-                player_has_received_ball = partial(self.has_received, player)
+                # player_is_closest = partial(self.is_closest_not_goalkeeper, player)
+                # player_is_not_closest = partial(self.is_not_closest, player)
+                # player_has_kicked = partial(self.has_kicked, player)
+                # player_is_receiving_pass = partial(self.ball_going_toward_player, player)
+                # player_is_not_receiving_pass = partial(self.ball_not_going_toward_player, player)
+                # player_has_received_ball = partial(self.has_received, player)
 
-                node_pass.connect_to(node_go_kick, when=player_is_closest)
-                node_pass.connect_to(node_wait_for_pass, when=player_is_receiving_pass)
-                node_wait_for_pass.connect_to(node_go_kick, when=player_has_received_ball)
-                node_wait_for_pass.connect_to(node_pass, when=player_is_not_receiving_pass)
-                node_go_kick.connect_to(node_pass, when=player_is_not_closest)
-                node_go_kick.connect_to(node_go_kick, when=player_has_kicked)
+                node_pass.connect_to(node_go_kick, player, when=self.is_closest_not_goalkeeper)
+                node_pass.connect_to(node_wait_for_pass, player, when=self.ball_going_toward_player)
+                node_wait_for_pass.connect_to(node_go_kick, player, when=self.has_received)
+                node_wait_for_pass.connect_to(node_pass, player, when=self.ball_not_going_toward_player)
+                node_go_kick.connect_to(node_pass, player, when=self.is_not_closest)
+                node_go_kick.connect_to(node_go_kick, player, when=self.has_kicked)
 
 
     @classmethod
